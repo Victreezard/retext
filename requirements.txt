@@ -1,2 +1,2 @@
-PySimpleGUI
-pywin32
+PySimpleGUI==4.44.0
+pywin32==301

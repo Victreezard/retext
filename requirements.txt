@@ -1,1 +1,2 @@
 PySimpleGUI==4.45.0
+pywin32==301

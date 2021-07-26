@@ -1,3 +1,6 @@
+from os import listdir, rename
+from os.path import abspath, join, splitext
+from re import compile
 import cfg
 import win32com.client
 import PySimpleGUI as sg
@@ -65,12 +68,33 @@ class Retext():
             sg.one_line_progress_meter(
                 'Retexting', slide.SlideNumber, self.ppt.Slides.Count)
 
+    @staticmethod
+    def rename(folder):
+        """
+        Remove leading letters and convert the remaining number to its equivalent alphabet.
+        Return a list of unchanged filenames if any.
+        PowerPoint has the filename format "Slide1" when saving slides as images.
+        """
+        letters = compile(r'^[a-zA-Z_]+')
+        folder = abspath(folder)
+        errors = []
+
+        for filename in listdir(folder):
+            try:
+                name, ext = splitext(letters.sub('', filename))
+                name = chr(ord('@') + int(name))
+                rename(join(folder, filename), join(folder, name + ext))
+            except Exception:
+                errors.append(filename)
+        return errors
+
 
 sg.theme('Black')
 SUBMIT_BUTTON = 'Retext'
 TITLES_INPUT = 'Slide Numbers'
 FONT_SIZE_INPUT = 'Font Size'
 TITLE_FONT_SIZE_INPUT = 'Title Font Size'
+RENAME_FOLDER_BROWSE = 'Rename Slides'
 
 layout = [
     [sg.Fr('Titles', [
@@ -83,7 +107,12 @@ layout = [
         [sg.Text(FONT_SIZE_INPUT)],
         [sg.InputText(k=FONT_SIZE_INPUT)]
     ])],
-    [sg.Button(SUBMIT_BUTTON)]
+    [sg.Button(SUBMIT_BUTTON),
+     # FolderBrowse doesn't seem to trigger events, so invisible Input to catch the event
+     sg.In(enable_events=True, visible=False, k=RENAME_FOLDER_BROWSE),
+     sg.FolderBrowse(RENAME_FOLDER_BROWSE,
+                     tooltip=cfg.Tooltip.RENAME_FOLDER_BROWSER)
+     ]
 ]
 
 rt = Retext()
@@ -93,7 +122,7 @@ while True:
     event, values = window.read()
     if event == sg.WIN_CLOSED:
         break
-    else:
+    elif event == SUBMIT_BUTTON:
         if values[FONT_SIZE_INPUT]:
             rt.font_size = rt.get_number(values[FONT_SIZE_INPUT])
         if values[TITLE_FONT_SIZE_INPUT]:
@@ -103,5 +132,10 @@ while True:
             values[TITLES_INPUT]) if values[TITLES_INPUT] else []
 
         rt.reformat(title_list)
+    elif event == RENAME_FOLDER_BROWSE:
+        errors = rt.rename(values[RENAME_FOLDER_BROWSE])
+        if errors:
+            sg.popup_error('The following files could not be renamed:',
+                           '\n'.join(errors), no_titlebar=True)
 
 window.close()

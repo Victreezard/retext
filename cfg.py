@@ -20,3 +20,6 @@ ICON_PATH = resolve_path(join(RESOURCES, ICON))
 POWERPOINT = "PowerPoint.Application"
 UPPERCASE = 3
 TITLECASE = 4
+
+class Tooltip():
+    RENAME_FOLDER_BROWSER = 'Browse the folder of slides saved as images and rename for sorting purposes.'

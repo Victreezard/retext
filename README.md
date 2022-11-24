@@ -15,6 +15,10 @@ Python script for OBS that resizes text frames of all slides in a PowerPoint pre
 2. Select the folder of images to be renamed
 ![retext_rename](https://user-images.githubusercontent.com/14161440/203753780-7c6e47ae-9b2d-4f83-9a61-9760f084237c.gif)
 
+# Environment
+This script was developed and tested using the following:
+ - Python 3.10.8
+ - OBS 28.1.2
 
 # Object References
 - TextRange.ChangeCase - https://docs.microsoft.com/en-us/office/vba/api/powerpoint.ppchangecase

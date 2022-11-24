@@ -1,16 +1,22 @@
 # retext
-Resize the text boxes slides in a PowerPoint presentation.
+Python script for OBS that resizes text frames of all slides in a PowerPoint presentation
 
-- Before
-![before](https://user-images.githubusercontent.com/14161440/127988542-ae42ed59-a289-481f-9c7e-78431b37d014.png)
-- After
-![after](https://user-images.githubusercontent.com/14161440/127988551-81aeaf58-8d0f-420c-b140-40abe7e6f052.png)
+![RetetxtScript](https://user-images.githubusercontent.com/14161440/203720232-985e6378-00a2-40d6-86fc-79f4fd14fe08.png)
 
-Rename slides saved as images for sorting purposes.
+# Getting Started
+## 
+TODO add GIF
 - Before
-![before_rename](https://user-images.githubusercontent.com/14161440/127988547-b7c6b704-04cf-4407-bc43-ad4d662a8cb6.png)
+![Presentation_Before](https://user-images.githubusercontent.com/14161440/203720435-6c13890f-dba3-420a-9e6f-8f42604dc5be.png)
 - After
-![after_rename](https://user-images.githubusercontent.com/14161440/127988555-42cff086-b876-4f0b-b86a-5e523659b72f.png)
+![Presentation_After](https://user-images.githubusercontent.com/14161440/203720545-2b9727e1-68bf-42ac-92ae-06674b61034b.png)
+
+## Rename slides saved as images for sorting purposes.
+- Before
+![Before_Rename](https://user-images.githubusercontent.com/14161440/203721222-228cb1fa-64af-456d-911e-d7f0eb4af214.png)
+- After
+![After_Rename](https://user-images.githubusercontent.com/14161440/203721250-4e107e0e-c229-40db-83bd-6cf4b88fb6e2.png)
+
 
 Object References:
 - TextRange.ChangeCase - https://docs.microsoft.com/en-us/office/vba/api/powerpoint.ppchangecase
